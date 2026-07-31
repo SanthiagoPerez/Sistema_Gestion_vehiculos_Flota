@@ -3,7 +3,8 @@ class Camion extends Vehiculo{
 
     public Camion(String placa, String marca, double kilometraje, double capacidadCarga){
         super(placa, marca, kilometraje);
-        this.capacidadCarga = capacidadCarga;
+        setCapacidadCarga(capacidadCarga);
+        //this.capacidadCarga = capacidadCarga; se borra porque con el set ya se está asignando
     }
 
     public double getCapacidadCarga() {
@@ -11,6 +12,9 @@ class Camion extends Vehiculo{
     }
 
     public void setCapacidadCarga(double capacidadCarga) {
+        if(capacidadCarga < 0){
+            throw new CapacidadCargaInvalidaException("La capacidad de carga no puede ser negativa");
+        }
         this.capacidadCarga = capacidadCarga;
     }
 
@@ -29,5 +33,5 @@ class Camion extends Vehiculo{
                 """, getPlaca(), getKilometraje(), capacidadCarga);
     }
 
-    //Acá se van a realizar las excepciones y se llamaran en el constructor
+    //Acá se van a realizar las excepciones
 }

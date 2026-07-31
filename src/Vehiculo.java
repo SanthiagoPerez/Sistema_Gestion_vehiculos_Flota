@@ -3,17 +3,21 @@ public abstract class Vehiculo {
     private double kilometraje;
 
     protected Vehiculo(String placa, String marca, double kilometraje){
+        if(placa == null || placa.isBlank()){
+            throw new PlacaInvalidaException("La placa no puede estar vacia");
+        }
+        setKilometraje(kilometraje);
         this.placa = placa;
         this.marca = marca;
-        this.kilometraje = kilometraje;
+        //this.kilometraje = kilometraje;
     }
 
     public String getPlaca() {
         return placa;
     }
 
-    public void setPlata(String plata) {
-        this.placa = plata;
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
 
     public String getMarca() {
@@ -21,6 +25,9 @@ public abstract class Vehiculo {
     }
 
     public void setMarca(String marca) {
+        if(getKilometraje() < 0){
+            throw new KilometrajeInvalidoException("El kilometraje no puede ser negativo");
+        }
         this.marca = marca;
     }
 
@@ -40,5 +47,4 @@ public abstract class Vehiculo {
 
     public abstract double calcularCostoMantenimiento();
 
-    //Acá se van a realizar las excepciones y se llamaran en el constructor
 }
